@@ -9,8 +9,9 @@ const QuotesList = () => {
     const request = await axiosApi.get('/quotes.json')
     const quotesList: QuoteType[] = []
     const postsKey = Object.keys(request.data).map(key => {
-      const quote = request.data
-      quotesList.push(quote.postType)
+      const quote = request.data[key]
+      quote.quoteType.id = key
+      quotesList.push(quote.quoteType)
     })
     setQuotes(quotesList)
   }
@@ -20,7 +21,7 @@ const QuotesList = () => {
   return (
     <div>
       {quotes?.map(quote => (
-        <Quote/>
+        <Quote id={quote.id} author={quote.author} category={quote.category} quoteText={quote.quoteText} />
       ))}
     </div>
   )

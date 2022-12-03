@@ -8,7 +8,7 @@ interface Props {
 
 const All: React.FC<Props> = ({ id }) => {
   let categories = null
-  if (id === '/') {
+  if (id === '/' || id === '/quotes') {
     categories = (
       <QuotesList />
     )

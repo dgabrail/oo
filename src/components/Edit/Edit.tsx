@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import axiosApi from '../../AxiosApi'
-import { QuoteType, QuoteRequest } from '../../types'
+import { QuoteRequest, QuoteType } from '../../types'
 
-const SubmitNewQuote = () => {
+const Edit = () => {
+  const params = useParams()
   const navigate = useNavigate()
   const [quote, setQuote] = useState<QuoteType>({
     author: '',
@@ -26,9 +27,23 @@ const SubmitNewQuote = () => {
     const quoteRequest: QuoteRequest = {
       quoteType: quote
     }
-    await axiosApi.post('/quotes.json', quoteRequest)
+    await axiosApi.put('/quotes/' + params.id + '.json', quoteRequest)
     navigate('/quotes')
   };
+
+  const quoteValue = async() => {
+   const quoteReqest = await axiosApi.get('/quotes/' + params.id + '.json')
+    setQuote(prev => ({
+      ...prev,
+      author: prev.author = quoteReqest.data.quoteType.author,
+      category: prev.category = quoteReqest.data.quoteType.category,
+      quoteText: prev.quoteText = quoteReqest.data.quoteType.quoteText
+    }))
+  }
+
+  useEffect(() => {
+    quoteValue()
+  } , [])
   return (
     <div style={{ marginLeft: '20px' }}>
       <form style={{ textAlign: 'left' }} onSubmit={onFormSubmit}>
@@ -68,4 +83,4 @@ const SubmitNewQuote = () => {
   )
 }
 
-export default SubmitNewQuote
+export default Edit

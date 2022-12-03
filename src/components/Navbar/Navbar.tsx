@@ -35,6 +35,18 @@ const Navbar = () => {
                 </NavLink>
               </li>
             </ul>
+            <ul className="navbar-nav mr-auto" style={{marginLeft: '50%'}}>
+              <li className="nav-item">
+                <NavLink to='/new-quote' className="nav-link">
+                  Submit new quote
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to='/quotes' className="nav-link">
+                  Quotes
+                </NavLink>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

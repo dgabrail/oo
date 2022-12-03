@@ -7,7 +7,7 @@ const SubmitNewQuote = () => {
   const navigate = useNavigate()
   const [quote, setQuote] = useState<QuoteType>({
     author: '',
-    category: '',
+    category: 'Star Wars',
     quoteText: '',
     id: ''
   })
@@ -18,6 +18,14 @@ const SubmitNewQuote = () => {
       ...prev,
       [name]: value
     }))
+  }
+
+  const categoryValue = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setQuote(prev => ({
+      ...prev,
+      category: prev.category = event.target.value
+    }))
+    console.log(quote.category)
   }
 
   const onFormSubmit = async (event: React.FormEvent) => {
@@ -34,13 +42,13 @@ const SubmitNewQuote = () => {
       <form style={{ textAlign: 'left' }} onSubmit={onFormSubmit}>
         <div className="form-group">
           <label htmlFor="Category">Category</label>
-          <input
-            style={{ width: '50%' }}
-            id="Category" type="text" name="category"
-            className="form-control"
-            value={quote.category}
-            onChange={change}
-          />
+          <select name="category" onChange={categoryValue} id="">
+            <option value="Star Wars">Star Wars</option>
+            <option value="Famous people">Famous people</option>
+            <option value="Saying">Saying</option>
+            <option value="Motivational">Motivational</option>
+            <option value="Humour">Humour</option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="Author">Author</label>

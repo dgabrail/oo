@@ -21,7 +21,7 @@ const QuotesList = () => {
   return (
     <div>
       {quotes?.map(quote => (
-        <Quote id={quote.id} author={quote.author} category={quote.category} quoteText={quote.quoteText} />
+        <Quote del={requestQuotes} id={quote.id} author={quote.author} category={quote.category} quoteText={quote.quoteText} />
       ))}
     </div>
   )

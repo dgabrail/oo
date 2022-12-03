@@ -1,24 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Navbar from './components/Navbar/Navbar';
+import All from './container/All/All';
 
 function App() {
+  const quotes = [
+    {id: '/'},
+    {id: 'star-wars' },
+    {id: 'motivational' },
+    {id: 'saying' },
+    {id: 'humour' },
+  ]
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <Navbar />
       </header>
+      <Routes>
+        <Route path='/' element={(
+          <All id={quotes[0].id}/>
+        )} />
+        <Route path='/star-wars' element={(
+          <All id={quotes[1].id}/>
+        )} />
+        <Route path='/saying' element={(
+          <All id={quotes[3].id}/>
+        )} />
+        <Route path='/humour' element={(
+          <All id={quotes[4].id}/>
+        )} />
+        <Route path='/motivational' element={(
+          <All id={quotes[2].id}/>
+        )} />
+      </Routes>
     </div>
   );
 }
